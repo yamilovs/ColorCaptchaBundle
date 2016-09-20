@@ -24,5 +24,8 @@ class YamilovsColorCaptchaExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        $resources = $container->getParameter('twig.form.resources');
+        $container->setParameter('twig.form.resources', array_merge(array('YamilovsColorCaptchaBundle::yamilovs.color_captcha.html.twig'), $resources));
     }
 }
