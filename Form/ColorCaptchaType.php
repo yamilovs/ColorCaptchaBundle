@@ -7,14 +7,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Yamilovs\ColorCaptchaBundle\Manager\ColorCaptchaManager;
+use Yamilovs\ColorCaptchaBundle\Manager\ColorCaptchaFactory;
 use Yamilovs\ColorCaptchaBundle\Validator\Constraints\ColorCaptchaConstraint;
 
 class ColorCaptchaType extends AbstractType
 {
-    public function __construct(ColorCaptchaManager $captchaManager)
+    public function __construct(ColorCaptchaFactory $captchaFactory)
     {
-        $captchaManager->setSessionColors();
+        $captchaFactory->setSessionColors();
     }
 
     public function configureOptions(OptionsResolver $resolver)

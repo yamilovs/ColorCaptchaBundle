@@ -1,8 +1,8 @@
 {%- block color_captcha_widget -%}
     {% set blockId, colorsConst, colorTextConst =
         "block_" ~ id,
-        constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaManager::COLOR_CAPTCHA_SESSION_COLORS'),
-        constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaManager::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT')
+        constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS'),
+        constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT')
     %}
     {# Hide default input type #}
     <style type="text/css">#{{ id }} {position: absolute; opacity: 0;}</style>
