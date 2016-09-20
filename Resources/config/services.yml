@@ -1,4 +1,19 @@
 services:
-#    yamilovs_color_captcha.example:
-#        class: Yamilovs\ColorCaptchaBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    # Manager
+    yamilovs.color_captcha.manager:
+        class: Yamilovs\ColorCaptchaBundle\Manager\ColorCaptchaManager
+        arguments: ["@session"]
+
+    # Form Type
+    yamilovs.color_captcha.form_type:
+        class: Yamilovs\ColorCaptchaBundle\Form\ColorCaptchaType
+        arguments: ["@yamilovs.color_captcha.manager"]
+        tags:
+            - { name: form.type }
+
+    # Validator
+    yamilovs.color_captcha.validator:
+        class: Yamilovs\ColorCaptchaBundle\Validator\Constraints\ColorCaptchaValidator
+        arguments: ["@yamilovs.color_captcha.manager"]
+        tags:
+            - { name: validator.constraint_validator }
