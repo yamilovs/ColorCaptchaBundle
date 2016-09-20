@@ -1,0 +1,4 @@
+services:
+#    yamilovs_color_captcha.example:
+#        class: Yamilovs\ColorCaptchaBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

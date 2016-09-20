@@ -1,0 +1,3 @@
+yamilovs_color_captcha_homepage:
+    path:     /
+    defaults: { _controller: YamilovsColorCaptchaBundle:Default:index }
