@@ -1,20 +1,41 @@
 <?php
 
-namespace Yamilovs\ColorCaptchaBundle\Form;
+namespace Yamilovs\ColorCaptchaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Translation\TranslatorInterface;
+use Yamilovs\ColorCaptchaBundle\Form\EventListener\ColorCaptchaListener;
 use Yamilovs\ColorCaptchaBundle\Manager\ColorCaptchaFactory;
-use Yamilovs\ColorCaptchaBundle\Validator\Constraints\ColorCaptchaConstraint;
 
 class ColorCaptchaType extends AbstractType
 {
-    public function __construct(ColorCaptchaFactory $captchaFactory)
+    protected $captchaFactory;
+    protected $translator;
+    protected $translationDomain;
+
+    public function __construct(ColorCaptchaFactory $captchaFactory, TranslatorInterface $translator, $translationDomain = null)
     {
-        $captchaFactory->setSessionColors();
+        $this->captchaFactory = $captchaFactory;
+        $this->translator = $translator;
+        $this->translationDomain = $translationDomain;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->addEventSubscriber(
+                new ColorCaptchaListener(
+                    $this->captchaFactory,
+                    $this->translator,
+                    $this->translationDomain
+                )
+            )
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -31,9 +52,6 @@ class ColorCaptchaType extends AbstractType
                     'max'           => 7,
                     'min'           => 7,
                     'exactMessage'  => 'yamilovs.color_captcha.exact',
-                )),
-                new ColorCaptchaConstraint(array(
-                    'notEqualMessage' => 'yamilovs.color_captcha.not_equal'
                 )),
             ),
         ));
