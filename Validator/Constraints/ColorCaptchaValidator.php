@@ -18,7 +18,7 @@ class ColorCaptchaValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         $sessionColorCaptchaValue = $this->captchaFactory->getSessionColor();
-        if (!$sessionColorCaptchaValue or strtoupper($value) != strtoupper($sessionColorCaptchaValue)) {
+        if (!$sessionColorCaptchaValue or $value != $sessionColorCaptchaValue) {
             $this->context->buildViolation($constraint->notEqualMessage)
                 ->addViolation();
         }
