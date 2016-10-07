@@ -31,9 +31,9 @@
             colorInput      = document.querySelector('#{{ id }}');
 
         captchaBlock.addEventListener('click', function (e) {
-            colorBlocks.forEach(function (elem) {
-                elem.classList.remove('selected');
-            });
+            for (var i = 0; i < colorBlocks.length; ++i) {
+                colorBlocks[i].classList.remove('selected');
+            }
             e.target.classList.add('selected');
             colorInput.value = e.target.getAttribute('data-color');
         });
