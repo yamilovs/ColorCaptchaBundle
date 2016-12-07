@@ -80,3 +80,8 @@ Then, add some styles for captcha markup. For a sample, in your css file:
 ```
 
 **That's all!**
+
+ToDo:
+-----
+* How to create your own colors
+* How to increase or decrease number of colors (need configuration implementation)
