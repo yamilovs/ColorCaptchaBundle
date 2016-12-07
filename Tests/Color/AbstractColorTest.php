@@ -11,15 +11,21 @@ abstract class AbstractColorTest extends \PHPUnit_Framework_TestCase
     /**
      * @return ColorInterface
      */
-    protected function getMockColor()
+    protected function getColor()
     {
         return $this->getMockBuilder('Yamilovs\ColorCaptchaBundle\Color\\' . ucfirst($this->getColorAlias()) . 'Color')
             ->getMockForAbstractClass();
     }
 
-    public function testColorAlias()
+    public function testGenerateReturnCorrectColorString()
     {
-        $color = $this->getMockColor();
+        $color = $this->getColor();
+        $this->assertRegExp('/^#[\d\w]{6}$/', $color->generate());;
+    }
+
+    public function testColorAliasIsValidForFileName()
+    {
+        $color = $this->getColor();
         $this->assertInstanceOf(ColorInterface::class, $color);
         $this->assertEquals($this->getColorAlias(), $color->getAlias());
     }
