@@ -14,11 +14,18 @@ class ColorCompilerPass implements CompilerPassInterface
             return;
         }
 
+        $colors = $container->getParameter('yamilovs_color_captcha.colors');
+
         $definition = $container->findDefinition('yamilovs.color_captcha.factory');
         $taggedServices = $container->findTaggedServiceIds('ColorCaptchaColor');
 
         foreach ($taggedServices as $id => $tags) {
-            $definition->addMethodCall('setCaptchaColor', array(new Reference($id)));
+            foreach ($tags as $attributes) {
+                if (empty($colors) or in_array($attributes['alias'], $colors)) {
+                    echo ($id);
+                    $definition->addMethodCall('setCaptchaColor', array(new Reference($id)));
+                }
+            }
         }
     }
 }
