@@ -15,29 +15,29 @@ services:
     yamilovs.color_captcha.color.red:
         class: Yamilovs\ColorCaptchaBundle\Color\RedColor
         tags:
-            - { name: ColorCaptchaColor }
+            - { name: ColorCaptchaColor, alias: red }
 
     yamilovs.color_captcha.color.blue:
         class: Yamilovs\ColorCaptchaBundle\Color\BlueColor
         tags:
-            - { name: ColorCaptchaColor }
+            - { name: ColorCaptchaColor, alias: blue }
 
     yamilovs.color_captcha.color.green:
         class: Yamilovs\ColorCaptchaBundle\Color\GreenColor
         tags:
-            - { name: ColorCaptchaColor }
+            - { name: ColorCaptchaColor, alias: green }
 
     yamilovs.color_captcha.color.grey:
         class: Yamilovs\ColorCaptchaBundle\Color\GreyColor
         tags:
-            - { name: ColorCaptchaColor }
+            - { name: ColorCaptchaColor, alias: grey }
 
     yamilovs.color_captcha.color.pink:
         class: Yamilovs\ColorCaptchaBundle\Color\PinkColor
         tags:
-            - { name: ColorCaptchaColor }
+            - { name: ColorCaptchaColor, alias: pink }
 
     yamilovs.color_captcha.color.yellow:
         class: Yamilovs\ColorCaptchaBundle\Color\YellowColor
         tags:
-            - { name: ColorCaptchaColor }
+            - { name: ColorCaptchaColor, alias: yellow }
