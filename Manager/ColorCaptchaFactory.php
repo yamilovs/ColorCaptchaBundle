@@ -7,9 +7,9 @@ use Yamilovs\ColorCaptchaBundle\Color\ColorInterface;
 
 class ColorCaptchaFactory
 {
-    CONST COLOR_CAPTCHA_SESSION_COLORS              = 'ColorCaptchaTargetColors';
-    CONST COLOR_CAPTCHA_SESSION_TARGET_COLOR        = 'ColorCaptchaTargetColor';
-    CONST COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT   = 'ColorCaptchaTargetColorText';
+    CONST COLOR_CAPTCHA_SESSION_COLORS = 'ColorCaptchaTargetColors';
+    CONST COLOR_CAPTCHA_SESSION_TARGET_COLOR = 'ColorCaptchaTargetColor';
+    CONST COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT = 'ColorCaptchaTargetColorText';
 
     protected $session;
     protected $colors;
@@ -19,9 +19,9 @@ class ColorCaptchaFactory
         $this->session = $session;
     }
 
-    public function setCaptchaColor(ColorInterface $color)
+    public function setCaptchaColor(ColorInterface $color, $alias)
     {
-        $this->colors[] = $color;
+        $this->colors[$alias] = $color;
     }
 
     public function getSessionColor()
@@ -44,21 +44,21 @@ class ColorCaptchaFactory
     protected function generateSessionColors()
     {
         $colors = $this->getRandomColors();
-        $one_color = array_rand($colors);
+        $key = array_rand($colors);
 
         $this->session->set(self::COLOR_CAPTCHA_SESSION_COLORS,             $colors);
-        $this->session->set(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR,       $colors[$one_color]);
-        $this->session->set(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT,  $one_color);
+        $this->session->set(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR,       $colors[$key]);
+        $this->session->set(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT,  $key);
     }
 
     protected function getRandomColors()
     {
         $result = array();
-        shuffle($this->colors);
+        $keys = array_keys($this->colors);
+        shuffle($keys);
 
-        /** @var ColorInterface $color */
-        foreach ($this->colors as $color) {
-            $result[$color->getAlias()] = $color->generate();
+        foreach ($keys as $key) {
+            $result[$key] = $this->colors[$key]->generate();
         }
 
         return $result;
