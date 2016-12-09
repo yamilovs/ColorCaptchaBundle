@@ -21,7 +21,7 @@ class ColorCompilerPass implements CompilerPassInterface
 
         foreach ($taggedServices as $id => $tags) {
             foreach ($tags as $attributes) {
-                if (empty($colors) or in_array($attributes['alias'], $colors)) {
+                if (empty($colors) || in_array($attributes['alias'], $colors)) {
                     $definition->addMethodCall('setCaptchaColor',
                         [
                             new Reference($id),
