@@ -1,9 +1,9 @@
 {%- block color_captcha_widget -%}
     {% set blockId, colorsConst, colorTextConst =
-        "block_" ~ id,
-        constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS'),
-        constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT')
-    %}
+    "block_" ~ id,
+    constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS'),
+    constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT') %}
+
     {# Hide default input type #}
     <style type="text/css">#{{ id }} {position: absolute; opacity: 0;}</style>
     <div id="{{ blockId }}" class="captcha-block">
@@ -17,7 +17,7 @@
                 {{ "yamilovs.color_captcha.help_text.before"|trans|raw }}
             </span>
             <span class="help-text-color">
-                {{ ("yamilovs.color_captcha.color." ~ app.session.get(colorTextConst))|trans|raw}}
+                {{ ("yamilovs.color_captcha.color." ~ app.session.get(colorTextConst))|trans|raw }}
             </span>
             <span class="help-text-after">
                 {{ "yamilovs.color_captcha.help_text.after"|trans|raw }}
@@ -26,9 +26,9 @@
         {{ form_widget(form) }}
     </div>
     <script type="text/javascript">
-        var captchaBlock    = document.querySelector('#{{ blockId }}'),
-            colorBlocks     = document.querySelectorAll('#{{blockId}} .captcha-color'),
-            colorInput      = document.querySelector('#{{ id }}');
+        var captchaBlock = document.querySelector('#{{ blockId }}'),
+            colorBlocks = document.querySelectorAll('#{{ blockId }} .captcha-color'),
+            colorInput = document.querySelector('#{{ id }}');
 
         captchaBlock.addEventListener('click', function (e) {
             for (var i = 0; i < colorBlocks.length; ++i) {
