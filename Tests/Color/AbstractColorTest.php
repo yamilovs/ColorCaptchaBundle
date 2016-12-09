@@ -23,10 +23,9 @@ abstract class AbstractColorTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/^#[\d\w]{6}$/', $color->generate());;
     }
 
-    public function testColorAliasIsValidForFileName()
+    public function testColorServiceImplementInterface()
     {
         $color = $this->getColor();
         $this->assertInstanceOf(ColorInterface::class, $color);
-        $this->assertEquals($this->getColorAlias(), $color->getAlias());
     }
 }

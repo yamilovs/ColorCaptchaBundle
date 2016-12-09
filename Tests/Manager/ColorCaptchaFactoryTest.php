@@ -34,14 +34,21 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
     protected function getColorCaptchaFactoryWithColors()
     {
         $this->session = new Session(new MockArraySessionStorage());
-        $this->colors = [new BlueColor(), new GreenColor(), new GreyColor(), new PinkColor(), new RedColor(), new YellowColor()];
+        $this->colors = [
+            'blue' => new BlueColor(),
+            'green' => new GreenColor(),
+            'grey' => new GreyColor(),
+            'pink' => new PinkColor(),
+            'red' => new RedColor(),
+            'yellow' => new YellowColor()
+        ];
 
         $factory = $this->getMockBuilder(ColorCaptchaFactory::class)
             ->setConstructorArgs([$this->session])
             ->getMockForAbstractClass();
 
-        foreach ($this->colors as $color) {
-            $factory->setCaptchaColor($color);
+        foreach ($this->colors as $alias => $color) {
+            $factory->setCaptchaColor($color, $alias);
         }
 
         return $factory;
