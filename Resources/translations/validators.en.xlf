@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="1">
                 <source>yamilovs.color_captcha.not_blank</source>
-                <target>You did not choose the color</target>
+                <target>You did not chose the color</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>yamilovs.color_captcha.exact</source>
@@ -12,7 +12,7 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>yamilovs.color_captcha.not_equal</source>
-                <target>You choose the wrong color</target>
+                <target>You chose the wrong color</target>
             </trans-unit>
         </body>
     </file>
