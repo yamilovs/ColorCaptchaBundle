@@ -122,4 +122,18 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
         $factory->generateSessionColors();
         $this->assertNotNull($factory->getSessionTargetColor());
     }
+
+
+    public function testThatGettingSessionTargetColorTextAreNull()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+        $this->assertNull($factory->getSessionTargetColorText());
+    }
+
+    public function testThatGettingSessionTargetColorTextAreNotNull()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+        $factory->generateSessionColors();
+        $this->assertNotNull($factory->getSessionTargetColorText());
+    }
 }
