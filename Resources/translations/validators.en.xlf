@@ -4,15 +4,15 @@
         <body>
             <trans-unit id="1">
                 <source>yamilovs.color_captcha.not_blank</source>
-                <target>You did not chose the color</target>
+                <target>You did not select the color/target>
             </trans-unit>
             <trans-unit id="2">
                 <source>yamilovs.color_captcha.exact</source>
-                <target>The color mast contain {{ limit }} charters</target>
+                <target>The color mast contains {{ limit }} charters</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>yamilovs.color_captcha.not_equal</source>
-                <target>You chose the wrong color</target>
+                <target>You have chosen the wrong color</target>
             </trans-unit>
         </body>
     </file>
