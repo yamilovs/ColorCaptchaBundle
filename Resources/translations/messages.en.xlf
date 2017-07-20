@@ -28,7 +28,7 @@
             </trans-unit>
             <trans-unit id="7">
                 <source>yamilovs.color_captcha.help_text.before</source>
-                <target>Please, select</target>
+                <target>Please, select a</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>yamilovs.color_captcha.help_text.after</source>
