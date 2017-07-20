@@ -33,14 +33,12 @@ class ColorCaptchaListener implements EventSubscriberInterface
         $selectedColor = $event->getData();
         $sessionColor = $this->captchaFactory->getSessionColor();
 
-        if ($form->isValid()) {
-            if ($selectedColor == $sessionColor) {
-                $this->captchaFactory->generateNewSessionColors();
-            } else {
-                $form->addError(new FormError($this->translator->trans('yamilovs.color_captcha.not_equal', [],
-                    $this->translationDomain)));
-            }
+        if ($selectedColor == $sessionColor) {
+            $this->captchaFactory->generateNewSessionColors();
+        } else {
+            $form->addError(new FormError($this->translator->trans('yamilovs.color_captcha.not_equal', array(), $this->translationDomain)));
         }
+
     }
 
     public static function getSubscribedEvents()
