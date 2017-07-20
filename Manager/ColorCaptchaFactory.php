@@ -36,6 +36,11 @@ class ColorCaptchaFactory
         }
     }
 
+    public function getSessionColors()
+    {
+        return $this->session->get(self::COLOR_CAPTCHA_SESSION_COLORS);
+    }
+
     public function generateNewSessionColors()
     {
         $this->generateSessionColors();

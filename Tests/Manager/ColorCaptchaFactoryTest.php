@@ -86,4 +86,42 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($nullColor);
         $this->assertEquals($color, $newColor);
     }
+
+    public function testThatNewSessionColorsAreNotEqual()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+
+        $factory->generateNewSessionColors();
+        $firstColors = $factory->getSessionColors();
+
+        $factory->generateNewSessionColors();
+        $secondColors = $factory->getSessionColors();
+
+        $this->assertTrue(count(array_diff($firstColors, $secondColors)) > 0);
+    }
+
+    public function testThatSessionColorsAreEqual()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+
+        $factory->setSessionColors();
+        $firstColors = $factory->getSessionColors();
+
+        $factory->setSessionColors();
+        $secondColors = $factory->getSessionColors();
+
+        $this->assertTrue(count(array_diff($firstColors, $secondColors)) == 0);
+    }
+
+    public function testThatFactoryReturnAllContainedColors()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+        $factory->setSessionColors();
+
+        $colors = $factory->getSessionColors();
+
+        foreach ($this->colors as $alias => $hex) {
+            $this->assertArrayHasKey($alias, $colors);
+        }
+    }
 }
