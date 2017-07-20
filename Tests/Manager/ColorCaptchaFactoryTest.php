@@ -61,7 +61,7 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory->generateSessionColors();
 
-        $expectedColor = $factory->getSessionColor();;
+        $expectedColor = $factory->getSessionTargetColor();;
         $color = $session->get(ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR);
         $colors = $session->get(ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS);
         $colorText = $session->get(ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT);
@@ -70,21 +70,6 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/^[\w]+$/', $colorText);
         $this->assertEquals($color, $colors[$colorText]);
         $this->assertEquals($expectedColor, $color);
-    }
-
-    public function testGettingSessionColor()
-    {
-        $factory = $this->getColorCaptchaFactoryWithColors();
-        $nullColor = $factory->getSessionColor();
-
-        $factory->generateNewSessionColors();
-        $color = $factory->getSessionColor();
-
-        $factory->generateSessionColors(); // Using this method should not change anything because session already has one selected color
-        $newColor = $factory->getSessionColor();
-
-        $this->assertNull($nullColor);
-        $this->assertEquals($color, $newColor);
     }
 
     public function testThatNewSessionColorsAreNotEqual()
@@ -123,5 +108,18 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
         foreach ($this->colors as $alias => $hex) {
             $this->assertArrayHasKey($alias, $colors);
         }
+    }
+
+    public function testThatGettingSessionTargetColorAreNull()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+        $this->assertNull($factory->getSessionTargetColor());
+    }
+
+    public function testThatGettingSessionTargetColorAreNotNull()
+    {
+        $factory = $this->getColorCaptchaFactoryWithColors();
+        $factory->generateSessionColors();
+        $this->assertNotNull($factory->getSessionTargetColor());
     }
 }

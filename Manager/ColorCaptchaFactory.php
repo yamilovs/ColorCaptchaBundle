@@ -24,7 +24,7 @@ class ColorCaptchaFactory
         $this->colors[$alias] = $color;
     }
 
-    public function getSessionColor()
+    public function getSessionTargetColor()
     {
         return $this->session->get(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR);
     }
