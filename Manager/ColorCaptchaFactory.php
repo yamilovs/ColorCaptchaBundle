@@ -26,13 +26,13 @@ class ColorCaptchaFactory
 
     public function getSessionColor()
     {
-        return $this->session->get(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR) ?: null;
+        return $this->session->get(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR);
     }
 
     public function setSessionColors()
     {
         if (!$this->session->get(self::COLOR_CAPTCHA_SESSION_COLORS)) {
-            $this->generateSessionColors();
+            $this->generateNewSessionColors();
         }
     }
 
