@@ -29,24 +29,24 @@ class ColorCaptchaFactory
         return $this->session->get(self::COLOR_CAPTCHA_SESSION_TARGET_COLOR);
     }
 
-    public function setSessionColors()
+    public function getSessionColors()
+    {
+        return $this->session->get(self::COLOR_CAPTCHA_SESSION_COLORS);
+    }
+
+    public function generateSessionColors()
     {
         if (!$this->session->get(self::COLOR_CAPTCHA_SESSION_COLORS)) {
             $this->generateNewSessionColors();
         }
     }
 
-    public function getSessionColors()
-    {
-        return $this->session->get(self::COLOR_CAPTCHA_SESSION_COLORS);
-    }
-
     public function generateNewSessionColors()
     {
-        $this->generateSessionColors();
+        $this->setRandomColorsToSession();
     }
 
-    protected function generateSessionColors()
+    protected function setRandomColorsToSession()
     {
         $colors = $this->getRandomColors();
         $key = array_rand($colors);

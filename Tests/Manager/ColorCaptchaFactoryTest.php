@@ -59,7 +59,7 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = $this->getColorCaptchaFactoryWithColors();
         $session = $this->session;
 
-        $factory->setSessionColors();
+        $factory->generateSessionColors();
 
         $expectedColor = $factory->getSessionColor();;
         $color = $session->get(ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR);
@@ -80,7 +80,7 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
         $factory->generateNewSessionColors();
         $color = $factory->getSessionColor();
 
-        $factory->setSessionColors(); // Using this method should not change anything because session already has one selected color
+        $factory->generateSessionColors(); // Using this method should not change anything because session already has one selected color
         $newColor = $factory->getSessionColor();
 
         $this->assertNull($nullColor);
@@ -104,10 +104,10 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $factory = $this->getColorCaptchaFactoryWithColors();
 
-        $factory->setSessionColors();
+        $factory->generateSessionColors();
         $firstColors = $factory->getSessionColors();
 
-        $factory->setSessionColors();
+        $factory->generateSessionColors();
         $secondColors = $factory->getSessionColors();
 
         $this->assertTrue(count(array_diff($firstColors, $secondColors)) == 0);
@@ -116,7 +116,7 @@ class ColorCaptchaFactoryTest extends \PHPUnit_Framework_TestCase
     public function testThatFactoryReturnAllContainedColors()
     {
         $factory = $this->getColorCaptchaFactoryWithColors();
-        $factory->setSessionColors();
+        $factory->generateSessionColors();
 
         $colors = $factory->getSessionColors();
 

@@ -24,7 +24,7 @@ class ColorCaptchaListener implements EventSubscriberInterface
 
     public function preSetData(FormEvent $event)
     {
-        $this->captchaFactory->setSessionColors();
+        $this->captchaFactory->generateSessionColors();
     }
 
     public function preSubmit(FormEvent $event)
