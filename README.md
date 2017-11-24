@@ -110,7 +110,17 @@ class FooType extends AbstractType
 }
 ```
 
+## Decrease number of colors
+You can adjust only those colors that you want:
+
+```yaml
+# app/config/config.yml
+
+yamilovs_color_captcha:
+    # available colors are: 'red', 'blue', 'green', 'grey', 'pink', 'yellow' 
+    colors: ['red', 'yellow']
+```
+
 ToDo:
 -----
 * How to create your own colors
-* How to increase or decrease number of colors (need configuration implementation)
