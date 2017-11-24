@@ -25,6 +25,7 @@
             colorInput = document.querySelector('#{{ id }}');
 
         captchaBlock.addEventListener('click', function (e) {
+            e.preventDefault();
             for (var i = 0; i < colorBlocks.length; ++i) {
                 colorBlocks[i].classList.remove('selected');
             }
