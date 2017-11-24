@@ -2,39 +2,27 @@
 
 namespace Yamilovs\ColorCaptchaBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Translation\TranslatorInterface;
-use Yamilovs\ColorCaptchaBundle\Form\EventListener\ColorCaptchaListener;
-use Yamilovs\ColorCaptchaBundle\Manager\ColorCaptchaFactory;
 
 class ColorCaptchaType extends AbstractType
 {
-    protected $captchaFactory;
-    protected $translator;
-    protected $translationDomain;
+    protected $colorCaptchaListener;
 
-    public function __construct(ColorCaptchaFactory $captchaFactory, TranslatorInterface $translator, $translationDomain = null)
+    public function __construct(EventSubscriberInterface $colorCaptchaListener)
     {
-        $this->captchaFactory = $captchaFactory;
-        $this->translator = $translator;
-        $this->translationDomain = $translationDomain;
+        $this->colorCaptchaListener = $colorCaptchaListener;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(
-                new ColorCaptchaListener(
-                    $this->captchaFactory,
-                    $this->translator,
-                    $this->translationDomain
-                )
-            )
+            ->addEventSubscriber($this->colorCaptchaListener)
         ;
     }
 

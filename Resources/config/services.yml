@@ -7,9 +7,14 @@ services:
     # Form Type
     yamilovs.color_captcha.form_type:
         class: Yamilovs\ColorCaptchaBundle\Form\Type\ColorCaptchaType
-        arguments: ["@yamilovs.color_captcha.factory", "@translator.default", "%validator.translation_domain%"]
+        arguments: ["@yamilovs.color_captcha.form_type_event_subscriber"]
         tags:
             - { name: form.type }
+
+    # Form Type Event Subscriber
+    yamilovs.color_captcha.form_type_event_subscriber:
+        class: Yamilovs\ColorCaptchaBundle\Form\EventListener\ColorCaptchaListener
+        arguments: ["@yamilovs.color_captcha.factory", "@translator.default", "%validator.translation_domain%"]
 
     # Colors
     yamilovs.color_captcha.color.red:
