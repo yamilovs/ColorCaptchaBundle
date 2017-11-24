@@ -81,6 +81,35 @@ Then, add some styles for captcha markup. For a sample, in your css file:
 
 **That's all!**
 
+## Displaying the help text relative of the colors block
+You can adjust how to display the help text globally through bundle configuration:
+
+```yaml
+# app/config/config.yml
+
+yamilovs_color_captcha:
+    # ......
+    help_text:
+        # position can be 'top' or 'bottom'
+        position: 'top' # default value is 'bottom'
+```
+
+Or just for a specific form type:
+
+```php
+class FooType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder
+                ->add('captcha', ColorCaptchaType::class, [
+                    'help_text_position' => 'top',
+                ])
+            ;
+        }
+}
+```
+
 ToDo:
 -----
 * How to create your own colors

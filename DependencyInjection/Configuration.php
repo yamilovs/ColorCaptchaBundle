@@ -21,12 +21,18 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('yamilovs_color_captcha');
 
         $rootNode
+            ->children()
+                ->arrayNode('help_text')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('position')->defaultValue('bottom')->end()
+                    ->end()
+                ->end()
+            ->end()
             ->fixXmlConfig('color')
             ->children()
                 ->arrayNode('colors')
-                    ->prototype('scalar')
-                    ->defaultNull()
-                    ->end()
+                    ->prototype('scalar')->defaultNull()->end()
                 ->end()
             ->end();
 

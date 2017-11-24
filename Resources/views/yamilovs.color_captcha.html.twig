@@ -1,28 +1,22 @@
 {%- block color_captcha_widget -%}
-    {% set blockId, colorsConst, colorTextConst =
+    {% set blockId, colorsConst =
     "block_" ~ id,
-    constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS'),
-    constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT') %}
+    constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS') %}
 
     {# Hide default input type #}
     <style type="text/css">#{{ id }} {position: absolute; opacity: 0;}</style>
     <div id="{{ blockId }}" class="captcha-block">
+        {% if help_text_position == 'top' %}
+            {{ _self.print_help_text() }}
+        {% endif %}
         {% for color, hex in app.session.get(colorsConst) %}
             <div class="captcha-color-wrapper">
                 <div class="captcha-color" style="background: {{ hex }};" data-color="{{ hex }}"></div>
             </div>
         {% endfor %}
-        <div class="help-text-block">
-            <span class="help-text-before">
-                {{ "yamilovs.color_captcha.help_text.before"|trans|raw }}
-            </span>
-            <span class="help-text-color">
-                {{ ("yamilovs.color_captcha.color." ~ app.session.get(colorTextConst))|trans|raw }}
-            </span>
-            <span class="help-text-after">
-                {{ "yamilovs.color_captcha.help_text.after"|trans|raw }}
-            </span>
-        </div>
+        {% if help_text_position == 'bottom' %}
+            {{ _self.print_help_text() }}
+        {% endif %}
         {{ form_widget(form) }}
     </div>
     <script type="text/javascript">
@@ -38,4 +32,20 @@
             colorInput.value = e.target.getAttribute('data-color');
         });
     </script>
+
+    {% macro print_help_text() %}
+        {% set colorTextConst = constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_TARGET_COLOR_TEXT') %}
+
+        <div class="help-text-block">
+            <span class="help-text-before">
+                {{ "yamilovs.color_captcha.help_text.before"|trans|raw }}
+            </span>
+            <span class="help-text-color">
+                {{ ("yamilovs.color_captcha.color." ~ app.session.get(colorTextConst))|trans|raw }}
+            </span>
+            <span class="help-text-after">
+                {{ "yamilovs.color_captcha.help_text.after"|trans|raw }}
+            </span>
+        </div>
+    {% endmacro %}
 {%- endblock color_captcha_widget -%}

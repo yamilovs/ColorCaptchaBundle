@@ -29,5 +29,6 @@ class YamilovsColorCaptchaExtension extends Extension
         $container->setParameter('twig.form.resources', array_merge(array('YamilovsColorCaptchaBundle::yamilovs.color_captcha.html.twig'), $resources));
 
         $container->setParameter($this->getAlias().".colors", $config['colors']);
+        $container->setParameter($this->getAlias().".help_text.position", $config['help_text']['position']);
     }
 }

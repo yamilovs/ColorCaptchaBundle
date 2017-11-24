@@ -7,7 +7,9 @@ services:
     # Form Type
     yamilovs.color_captcha.form_type:
         class: Yamilovs\ColorCaptchaBundle\Form\Type\ColorCaptchaType
-        arguments: ["@yamilovs.color_captcha.form_type_event_subscriber"]
+        arguments:
+            - "@yamilovs.color_captcha.form_type_event_subscriber"
+            - "%yamilovs_color_captcha.help_text.position%"
         tags:
             - { name: form.type }
 
