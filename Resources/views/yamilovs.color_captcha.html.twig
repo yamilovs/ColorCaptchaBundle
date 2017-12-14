@@ -1,4 +1,6 @@
 {%- block color_captcha_widget -%}
+    {% from _self import print_help_text %}
+
     {% set blockId, colorsConst =
     "block_" ~ id,
     constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS') %}
@@ -7,7 +9,7 @@
     <style type="text/css">#{{ id }} {position: absolute; opacity: 0;}</style>
     <div id="{{ blockId }}" class="captcha-block">
         {% if help_text_position == 'top' %}
-            {{ _self.print_help_text() }}
+            {{ print_help_text() }}
         {% endif %}
         {% for color, hex in app.session.get(colorsConst) %}
             <div class="captcha-color-wrapper">
@@ -15,7 +17,7 @@
             </div>
         {% endfor %}
         {% if help_text_position == 'bottom' %}
-            {{ _self.print_help_text() }}
+            {{ print_help_text() }}
         {% endif %}
         {{ form_widget(form) }}
     </div>
