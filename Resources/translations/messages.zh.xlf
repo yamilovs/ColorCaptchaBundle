@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="zh" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>yamilovs.color_captcha.color.red</source>
+                <target>紅</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>yamilovs.color_captcha.color.green</source>
+                <target>綠</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>yamilovs.color_captcha.color.blue</source>
+                <target>藍</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>yamilovs.color_captcha.color.yellow</source>
+                <target>黃</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>yamilovs.color_captcha.color.grey</source>
+                <target>灰色</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>yamilovs.color_captcha.color.pink</source>
+                <target>pink</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>yamilovs.color_captcha.help_text.before</source>
+                <target>點擊</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>yamilovs.color_captcha.help_text.after</source>
+                <target>廣場</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
+
