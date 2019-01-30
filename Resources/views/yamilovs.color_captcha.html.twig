@@ -1,12 +1,13 @@
 {%- block color_captcha_widget -%}
     {% from _self import print_help_text %}
 
-    {% set blockId, colorsConst =
-    "block_" ~ id,
-    constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS') %}
+    {% set rnd = "now"|date('U') ~ random() %}
+    {% set inputId = "input_" ~ id ~ rnd %}
+    {% set blockId = "block_" ~ id ~ rnd %}
+    {% set colorsConst = constant('Yamilovs\\ColorCaptchaBundle\\Manager\\ColorCaptchaFactory::COLOR_CAPTCHA_SESSION_COLORS') %}
 
     {# Hide default input type #}
-    <style type="text/css">#{{ id }} {position: absolute; opacity: 0;}</style>
+    <style type="text/css">#{{ inputId }} {position: absolute; opacity: 0;}</style>
     <div id="{{ blockId }}" class="captcha-block">
         {% if help_text_position == 'top' %}
             {{ print_help_text() }}
@@ -19,20 +20,20 @@
         {% if help_text_position == 'bottom' %}
             {{ print_help_text() }}
         {% endif %}
-        {{ form_widget(form) }}
+        {{ form_widget(form, {id: inputId}) }}
     </div>
     <script type="text/javascript">
-        var captchaBlock = document.querySelector('#{{ blockId }}'),
-            colorBlocks = document.querySelectorAll('#{{ blockId }} .captcha-color'),
-            colorInput = document.querySelector('#{{ id }}');
+        var captchaBlock{{ rnd }} = document.querySelector('#{{ blockId }}'),
+            colorBlocks{{ rnd }} = document.querySelectorAll('#{{ blockId }} .captcha-color'),
+            colorInput{{ rnd }} = document.querySelector('#{{ inputId }}');
 
-        captchaBlock.addEventListener('click', function (e) {
+        captchaBlock{{ rnd }}.addEventListener('click', function (e) {
             e.preventDefault();
-            for (var i = 0; i < colorBlocks.length; ++i) {
-                colorBlocks[i].classList.remove('selected');
+            for (var i = 0; i < colorBlocks{{ rnd }}.length; ++i) {
+                colorBlocks{{ rnd }}[i].classList.remove('selected');
             }
             e.target.classList.add('selected');
-            colorInput.value = e.target.getAttribute('data-color');
+            colorInput{{ rnd }}.value = e.target.getAttribute('data-color');
         });
     </script>
 
